@@ -3,12 +3,7 @@ import { z } from "zod";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { sendTelegramMessage } from "sendkit-core";
-import {
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  writeFileSync
-} from "node:fs"
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const program = new Command();
 const configPath = join(homedir(), ".config", "sendkit", "config.json");
@@ -38,9 +33,7 @@ const getTelegramBotToken = () => {
   return token;
 };
 
-program
-  .name("sendkit")
-  .description("SendKit CLI backed by sendkit-core");
+program.name("sendkit").description("SendKit CLI backed by sendkit-core");
 
 program
   .command("init")
@@ -60,7 +53,7 @@ program
     const result = await sendTelegramMessage({
       botToken: getTelegramBotToken(),
       chatId,
-      message
+      message,
     });
 
     console.log(JSON.stringify(result));

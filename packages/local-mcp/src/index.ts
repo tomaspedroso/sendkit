@@ -22,19 +22,19 @@ server.registerTool(
   {
     title: "Telegram",
     description: "Send a Telegram message.",
-    inputSchema: telegramMessageInputSchema.shape
+    inputSchema: telegramMessageInputSchema.shape,
   },
   async (input) => {
     const result = await sendTelegramMessage({
       ...input,
-      botToken: getTelegramBotToken()
+      botToken: getTelegramBotToken(),
     });
 
     return {
       content: [
         {
           type: "text",
-          text: `Sent Telegram message ${result.messageId} to chat ${result.chatId}`
+          text: `Sent Telegram message ${result.messageId} to chat ${result.chatId}`,
         },
       ],
       structuredContent: result,

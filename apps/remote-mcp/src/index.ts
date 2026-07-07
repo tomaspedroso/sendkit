@@ -1,14 +1,12 @@
 import { Hono } from "hono";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import {
-  WebStandardStreamableHTTPServerTransport
-} from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
+import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { sendTelegramMessage, telegramMessageInputSchema } from "sendkit-core";
 
 export const createServer = (botToken: string) => {
   const server = new McpServer({
     name: "sendkit-remote",
-    version: "1.0.0"
+    version: "1.0.0",
   });
 
   server.registerTool(
@@ -16,19 +14,19 @@ export const createServer = (botToken: string) => {
     {
       title: "Telegram",
       description: "Send a Telegram message.",
-      inputSchema: telegramMessageInputSchema.shape
+      inputSchema: telegramMessageInputSchema.shape,
     },
     async (input) => {
       const result = await sendTelegramMessage({
         ...input,
-        botToken
+        botToken,
       });
 
       return {
         content: [
           {
             type: "text",
-            text: `Sent Telegram message ${result.messageId} to chat ${result.chatId}`
+            text: `Sent Telegram message ${result.messageId} to chat ${result.chatId}`,
           },
         ],
         structuredContent: result,
